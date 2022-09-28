@@ -20,14 +20,11 @@
 <script type="text/javascript">
 
   var spec2 = "js/visualization.vg.json";
-  vegaEmbed('#symbol_map1', spec2).then(function(result) {
+  var spec3 = "js/choroplethmap.vg.json";
+  vegaEmbed('#symbol_map1', spec2,spec3).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
   
-  var spec3 = "js/visualization.vg.json";
-  vegaEmbed('#symbol_map1', spec3).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
 </script>
 
 </body>
