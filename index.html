@@ -16,7 +16,6 @@
 <h1>Tsunami Historical Data from 1800 to 2021</h1>
   
 <div id="symbol_map1"></div>
-<div id="symbol_map2"></div>
 
 <script type="text/javascript">
 
@@ -26,7 +25,7 @@
   }).catch(console.error);
   
   var spec3 = "js/visualization.vg.json";
-  vegaEmbed('#symbol_map2', spec3).then(function(result) {
+  vegaEmbed('#symbol_map1', spec3).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>
