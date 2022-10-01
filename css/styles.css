@@ -5,7 +5,9 @@ body *{
 h1 {
     font-weight: 900;
 }
-
+p{
+    font-weight: 700;
+}
 body {
     background-color: lightgray;
 }
@@ -19,7 +21,7 @@ body {
 }
 
 .vis-container {
-    width: 50%;
+    width: 100%;
 }
 
 .description h2,
