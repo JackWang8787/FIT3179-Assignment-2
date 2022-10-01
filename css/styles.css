@@ -23,7 +23,7 @@ body {
 }
 
 .vis-container {
-    width: 10%;
+    width: 100%;
 }
 
 .description h2,
@@ -37,6 +37,10 @@ h1 {
 
 .description-left {
     padding-right: 50px;
+}
+
+.pure-u-1-2 {
+    width: 500; 
 }
 
 .pure-g {
