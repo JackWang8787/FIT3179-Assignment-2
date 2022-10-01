@@ -40,7 +40,8 @@ h1 {
 }
 
 .pure-u-1-2 img {
-    width: 500; 
+    width: 500vw; 
+    height: 500vw;
 }
 
 .pure-g {
