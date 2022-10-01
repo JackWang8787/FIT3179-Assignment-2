@@ -15,7 +15,7 @@ body {
 }
 
 .page {
-    width: 1000;
+    width: auto;
     background-color: white;
     margin: auto;
     padding: 50px;
@@ -23,7 +23,7 @@ body {
 }
 
 .vis-container {
-    width: 100%;
+    width: auto;
 }
 
 .description h2,
@@ -37,11 +37,6 @@ h1 {
 
 .description-left {
     padding-right: 50px;
-}
-
-.pure-u-1-2 {
-    width: 500vw; 
-    height: 500vw;
 }
 
 .pure-g {
