@@ -5,9 +5,11 @@ body *{
 h1 {
     font-weight: 900;
 }
+
 p{
     font-weight: 700;
 }
+
 body {
     background-color: lightgray;
 }
@@ -30,11 +32,11 @@ h1 {
 }
 
 .description-right {
-    padding-left: 20px;
+    padding-left: 50px;
 }
 
 .description-left {
-    padding-right: 20px;
+    padding-right: 50px;
 }
 
 .pure-g {
