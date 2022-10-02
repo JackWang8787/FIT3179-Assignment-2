@@ -11,12 +11,12 @@ p{
 }
 
 body {
-    background-color: lightgray;
+    background-color: blue;
 }
 
 .page {
-    width: 10000;
-    background-color: black;
+    width: 1000;
+    background-color: white;
     margin: auto;
     padding: 50px;
     padding-top: 35px;
