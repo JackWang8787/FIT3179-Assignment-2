@@ -17,7 +17,6 @@ body {
 .page {
     width: 1500px;
     background-color: white;
-    background-image : url(https://www.grunge.com/img/gallery/the-truth-about-the-biggest-tsunami-ever-recorded/l-intro-1626814547.jpg);
     margin: auto;
     padding: 50px;
     padding-top: 35px;
@@ -38,6 +37,11 @@ h1 {
 
 .description-right {
     padding-left: 50px;
+}
+
+.title {
+    background-image: url("https://www.grunge.com/img/gallery/the-truth-about-the-biggest-tsunami-ever-recorded/l-intro-1626814547.jpg");
+    background-color: #cccccc;
 }
 
 .description-left {
