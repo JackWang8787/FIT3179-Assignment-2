@@ -53,12 +53,12 @@ h1 {
       content: "";
       background-image: url("https://assets.digitalocean.com/labs/images/community_bg.png");
       background-size: cover;
-      position: absolute;
+      position: relative;
       top: 0px;
       right: 0px;
       bottom: 0px;
       left: 0px;
-      opacity: 0.75;
+      opacity: 0.3;
 }
 
 .description-left {
