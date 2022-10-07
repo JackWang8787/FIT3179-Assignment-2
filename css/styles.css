@@ -41,6 +41,7 @@ h1 {
 
 .title {
     background-image: url("https://assets.digitalocean.com/labs/images/community_bg.png");
+    opacity: 0.6;
 }
 
 .description-left {
