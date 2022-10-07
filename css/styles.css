@@ -3,11 +3,8 @@ body *{
 }
 
 h1 {
-  position: relative;
   color: #ffffff;  
-  font-size: 14rem;
-  line-height: 0.9;
-  text-align: center;
+  font-size: 900;
 }
 
 p{
