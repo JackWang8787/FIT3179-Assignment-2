@@ -40,13 +40,7 @@ h1 {
 }
 
 .title {
-    position: relative; 
-}
-
-.title::before{
     background-image: url("https://assets.digitalocean.com/labs/images/community_bg.png");
-    opacity: 0.6;
-    position: absolute;
 }
 
 .description-left {
