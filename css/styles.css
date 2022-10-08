@@ -4,9 +4,9 @@ body *{
 
 h1 {
   position: relative;
-  color: #ffffff;  
+  color: #000000;  
   font-weight: bold;
-  line-height: 0.9;
+  line-height: auto;
   text-align: center;
 }
 
