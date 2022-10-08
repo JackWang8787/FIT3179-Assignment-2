@@ -56,7 +56,7 @@ h1 {
 .title::before {    
       content: "";
       background-image: url("https://assets.digitalocean.com/labs/images/community_bg.png");
-      background-size: cover;
+      background-size: auto;
       position: absolute;
       top: 0px;
       right: 0px;
