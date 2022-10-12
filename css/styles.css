@@ -6,8 +6,8 @@ h1 {
   position: relative;
   color: #000000;  
   font-weight: bold;
-  line-height: auto;
-  text-align: auto;
+  line-height: center;
+  text-align: center;
 }
 
 p{
