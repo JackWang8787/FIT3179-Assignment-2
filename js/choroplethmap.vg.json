@@ -1,0 +1,160 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "background": "white",
+  "padding": 5,
+  "width": 600,
+  "height": 400,
+  "title": {
+    "text": "The Number of Tsunami occured and their Causes By Country",
+    "frame": "group"
+  },
+  "data": [
+    {
+      "name": "source_0",
+      "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
+      "format": {"type": "topojson", "feature": "oceans"}
+    },
+    {
+      "name": "source_2",
+      "url": "https://raw.githubusercontent.com/JackWang8787/FIT3179-Assignment-2/main/data/tsunami%20historical%20data%20from%201800%20to%202021.csv",
+      "format": {"type": "csv", "delimiter": ","}
+    },
+    {
+      "name": "source_1",
+      "url": "https://raw.githubusercontent.com/JackWang8787/FIT3179-Assignment-2/main/js/ne_110m_admin_0_countries.json",
+      "format": {
+        "type": "topojson",
+        "feature": "ne_110m_admin_0_countries",
+        "parse": {}
+      },
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "datum[\"properties\"] && datum[\"properties\"][\"NAME\"]",
+          "as": "properties.NAME"
+        },
+        {
+          "type": "lookup",
+          "from": "source_2",
+          "key": "Country",
+          "fields": ["properties.NAME"],
+          "values": [
+            "Occurences",
+            "Tsunami Cause Code",
+            "Longitude",
+            "Latitude"
+          ]
+        },
+        {
+          "type": "filter",
+          "expr": "isValid(datum[\"Occurences\"]) && isFinite(+datum[\"Occurences\"])"
+        }
+      ]
+    }
+  ],
+  "projections": [
+    {
+      "name": "projection",
+      "translate": {"signal": "[width / 2, height / 2]"},
+      "type": "equalEarth",
+      "center": {"signal": "center_to"},
+      "scale": {"signal": "zoom_level"}
+    }
+  ],
+  "signals": [
+    {
+      "name": "zoom_level",
+      "value": 100,
+      "bind": {
+        "input": "range",
+        "min": 100,
+        "max": 1200,
+        "step": 50,
+        "name": "Zoom: "
+      }
+    },
+    {
+      "name": "center_to",
+      "value": [0, 0],
+      "bind": {
+        "input": "select",
+        "options": [
+          [0, 0],
+          [90, 180],
+          [180, -150],
+          [180, 150],
+          [-90, -180],
+          [-180, -150],
+          [-180, 150]
+        ],
+        "labels": [
+          "Center",
+          "Right",
+          "Bottom Right",
+          "Top Right",
+          "Left",
+          "Bottom Left",
+          "Top Left"
+        ],
+        "name": "Map Centre: "
+      }
+    }
+  ],
+  "marks": [
+    {
+      "name": "layer_0_marks",
+      "type": "shape",
+      "clip": true,
+      "style": ["geoshape"],
+      "from": {"data": "source_0"},
+      "encode": {
+        "update": {
+          "fill": {"value": "skyblue"},
+          "ariaRoleDescription": {"value": "geoshape"}
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    },
+    {
+      "name": "layer_1_marks",
+      "type": "shape",
+      "clip": true,
+      "style": ["geoshape"],
+      "from": {"data": "source_1"},
+      "encode": {
+        "update": {
+          "stroke": {"value": "#fff"},
+          "strokeWidth": {"value": 0.5},
+          "fill": {"scale": "color", "field": "Occurences"},
+          "tooltip": {
+            "signal": "{\"Country\": isValid(datum[\"properties.NAME\"]) ? datum[\"properties.NAME\"] : \"\"+datum[\"properties.NAME\"], \"Number of Tsunami occured\": format(datum[\"Occurences\"], \"\")}"
+          },
+          "ariaRoleDescription": {"value": "geoshape"},
+          "description": {
+            "signal": "\"Number of Tsunami occured: \" + (format(datum[\"Occurences\"], \"\")) + \"; Country: \" + (isValid(datum[\"properties.NAME\"]) ? datum[\"properties.NAME\"] : \"\"+datum[\"properties.NAME\"])"
+          }
+        }
+      },
+      "transform": [{"type": "geoshape", "projection": "projection"}]
+    }
+  ],
+  "scales": [
+    {
+      "name": "color",
+      "type": "threshold",
+      "domain": [50, 100, 150],
+      "range": ["#fdbe85", "#fd8d3c", "#e6550d", "#a63603"],
+      "interpolate": "hcl"
+    }
+  ],
+  "legends": [
+    {
+      "title": "Number of Tsunami occured",
+      "fill": "color",
+      "labelOverlap": "greedy",
+      "symbolType": "circle",
+      "encode": {"symbols": {"update": {"stroke": {"value": "#fff"}}}}
+    }
+  ],
+  "config": {}
+}
