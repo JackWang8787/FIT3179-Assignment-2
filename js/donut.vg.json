@@ -1,0 +1,198 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "background": "white",
+  "padding": 5,
+  "width": 700,
+  "height": 400,
+  "title": {"text": "12 Reasons to Cause a Tsunami", "frame": "group"},
+  "data": [
+    {"name": "continent_highlight_store"},
+    {
+      "name": "source_0",
+      "url": "https://raw.githubusercontent.com/JackWang8787/FIT3179-Assignment-2/main/data/tsunami%20historical%20data%20from%201800%20to%202021.csv",
+      "format": {"type": "csv", "delimiter": ","},
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": ["Tsunami Cause Code"],
+          "ops": ["count"],
+          "fields": [null],
+          "as": ["__count"]
+        },
+        {
+          "type": "stack",
+          "groupby": [],
+          "field": "__count",
+          "sort": {"field": ["Tsunami Cause Code"], "order": ["ascending"]},
+          "as": ["__count_start", "__count_end"],
+          "offset": "normalize"
+        }
+      ]
+    }
+  ],
+  "signals": [
+    {
+      "name": "unit",
+      "value": {},
+      "on": [
+        {"events": "mousemove", "update": "isTuple(group()) ? group() : unit"}
+      ]
+    },
+    {
+      "name": "continent_highlight_Tsunami_Cause_Code_legend",
+      "value": null,
+      "on": [
+        {
+          "events": [
+            {
+              "source": "view",
+              "type": "click",
+              "markname": "Tsunami_Cause_Code_legend_symbols"
+            },
+            {
+              "source": "view",
+              "type": "click",
+              "markname": "Tsunami_Cause_Code_legend_labels"
+            },
+            {
+              "source": "view",
+              "type": "click",
+              "markname": "Tsunami_Cause_Code_legend_entries"
+            }
+          ],
+          "update": "datum.value || item().items[0].items[0].datum.value",
+          "force": true
+        },
+        {
+          "events": [{"source": "view", "type": "click"}],
+          "update": "!event.item || !datum ? null : continent_highlight_Tsunami_Cause_Code_legend",
+          "force": true
+        }
+      ]
+    },
+    {
+      "name": "continent_highlight",
+      "update": "vlSelectionResolve(\"continent_highlight_store\", \"union\", true, true)"
+    },
+    {
+      "name": "continent_highlight_tuple",
+      "update": "continent_highlight_Tsunami_Cause_Code_legend !== null ? {fields: continent_highlight_tuple_fields, values: [continent_highlight_Tsunami_Cause_Code_legend]} : null"
+    },
+    {
+      "name": "continent_highlight_tuple_fields",
+      "value": [{"type": "E", "field": "Tsunami Cause Code"}]
+    },
+    {
+      "name": "continent_highlight_toggle",
+      "value": false,
+      "on": [
+        {
+          "events": {"merge": [{"source": "view", "type": "click"}]},
+          "update": "event.shiftKey"
+        }
+      ]
+    },
+    {
+      "name": "continent_highlight_modify",
+      "on": [
+        {
+          "events": {"signal": "continent_highlight_tuple"},
+          "update": "modify(\"continent_highlight_store\", continent_highlight_toggle ? null : continent_highlight_tuple, continent_highlight_toggle ? null : true, continent_highlight_toggle ? continent_highlight_tuple : null)"
+        }
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "name": "marks",
+      "type": "arc",
+      "style": ["arc"],
+      "interactive": true,
+      "from": {"data": "source_0"},
+      "encode": {
+        "update": {
+          "innerRadius": {"value": 100},
+          "tooltip": {
+            "signal": "{\"Count of Records\": format(datum[\"__count\"], \"\"), \"Tsunami Cause Code\": isValid(datum[\"Tsunami Cause Code\"]) ? datum[\"Tsunami Cause Code\"] : \"\"+datum[\"Tsunami Cause Code\"]}"
+          },
+          "fill": {"scale": "color", "field": "Tsunami Cause Code"},
+          "opacity": [
+            {
+              "test": "!length(data(\"continent_highlight_store\")) || vlSelectionTest(\"continent_highlight_store\", datum)",
+              "value": 1
+            },
+            {"value": 0.1}
+          ],
+          "description": {
+            "signal": "\"Count of Records: \" + (format(datum[\"__count\"], \"\")) + \"; Tsunami Cause Code: \" + (isValid(datum[\"Tsunami Cause Code\"]) ? datum[\"Tsunami Cause Code\"] : \"\"+datum[\"Tsunami Cause Code\"])"
+          },
+          "x": {"signal": "width", "mult": 0.5},
+          "y": {"signal": "height", "mult": 0.5},
+          "outerRadius": {"signal": "min(width,height)/2"},
+          "startAngle": {"scale": "theta", "field": "__count_end"},
+          "endAngle": {"scale": "theta", "field": "__count_start"}
+        }
+      }
+    }
+  ],
+  "scales": [
+    {
+      "name": "theta",
+      "type": "linear",
+      "domain": [0, 1],
+      "range": [0, 6.283185307179586],
+      "zero": true
+    },
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": {
+        "data": "source_0",
+        "field": "Tsunami Cause Code",
+        "sort": true
+      },
+      "range": {"scheme": "category20b"}
+    }
+  ],
+  "legends": [
+    {
+      "fill": "color",
+      "symbolType": "circle",
+      "title": "Tsunami Cause Code",
+      "encode": {
+        "labels": {
+          "name": "Tsunami_Cause_Code_legend_labels",
+          "interactive": true,
+          "update": {
+            "opacity": [
+              {
+                "test": "(!length(data(\"continent_highlight_store\")) || (continent_highlight[\"Tsunami Cause Code\"] && indexof(continent_highlight[\"Tsunami Cause Code\"], datum.value) >= 0))",
+                "value": 1
+              },
+              {"value": 0.35}
+            ]
+          }
+        },
+        "symbols": {
+          "name": "Tsunami_Cause_Code_legend_symbols",
+          "interactive": true,
+          "update": {
+            "opacity": [
+              {
+                "test": "(!length(data(\"continent_highlight_store\")) || (continent_highlight[\"Tsunami Cause Code\"] && indexof(continent_highlight[\"Tsunami Cause Code\"], datum.value) >= 0))",
+                "value": 1
+              },
+              {"value": 0.35}
+            ]
+          }
+        },
+        "entries": {
+          "name": "Tsunami_Cause_Code_legend_entries",
+          "interactive": true,
+          "update": {"fill": {"value": "transparent"}}
+        }
+      }
+    }
+  ],
+  "config": {}
+}
