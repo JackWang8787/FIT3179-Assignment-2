@@ -5,7 +5,7 @@
   "width": 800,
   "height": 400,
   "title": {
-    "text": "Years with Higher Number of Tsunami occured",
+    "text": "Top Years with Highest Number of Tsunami occured",
     "frame": "group"
   },
   "style": "cell",
