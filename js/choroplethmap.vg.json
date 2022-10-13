@@ -64,7 +64,7 @@
   "signals": [
     {
       "name": "zoom_level",
-      "value": 100,
+      "value": 150,
       "bind": {
         "input": "range",
         "min": 100,
