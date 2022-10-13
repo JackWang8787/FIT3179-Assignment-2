@@ -76,3 +76,8 @@ h1 {
 .small-font {
     font-size: 14px;
 }
+
+.bold_word {
+    font-weight: bold;
+    font-style: italic;
+}
