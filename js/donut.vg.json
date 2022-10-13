@@ -4,7 +4,7 @@
   "padding": 5,
   "width": 800,
   "height": 400,
-  "title": {"text": "12 Reasons to Cause a Tsunami", "frame": "group"},
+  "title": {"text": "12 Causes of Tsunami", "frame": "group"},
   "data": [
     {"name": "continent_highlight_store"},
     {
