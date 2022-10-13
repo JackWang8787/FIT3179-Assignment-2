@@ -81,3 +81,7 @@ h1 {
     font-weight: 900;
     font-style: italic;
 }
+
+.color_red {
+    color: #a63603;
+}
